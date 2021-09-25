@@ -1,11 +1,12 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import  './styles.scss';
 
 export const Footer: React.FC = () => {
   return (
-    <div>
-      
+    <div className="footer" >
+      <div>Movie App</div>
+      <div>©2021 Movie App | AdryelliReiz</div>
     </div>
   );
 }
