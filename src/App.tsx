@@ -7,17 +7,17 @@ import { Home } from './components/Home';
 import { MovieDetails } from './components/MovieDetails';
 import { PageNotFound } from './components/PageNotFound/MovieListing';
 
-import './styles/app.scss'
-
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/movie/:id" component={MovieDetails} />
-        <Route component={PageNotFound} />
-      </Switch>
+      <div className="container" >      
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/movie/:id" component={MovieDetails} />
+          <Route component={PageNotFound} />
+        </Switch>
+      </div>
       <Footer />
     </BrowserRouter>
   );
