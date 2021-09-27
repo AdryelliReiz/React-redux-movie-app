@@ -1,11 +1,33 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import './styles.scss';
 
-export const MovieCard: React.FC = () => {
+export interface IMovieProps {
+  data: {
+    Title: string,
+    Year: string,
+    imdbID: string,
+    Type: string,
+    Poster: string
+  }
+}
+
+export const MovieCard = (props : IMovieProps) => {
+  const { data } = props;
+
   return (
-    <div>
-
+    <div className="card-item" >
+      <div className="card-inner">
+        <div className="card-top">
+          <img src={data.Poster} alt={data.Title} />
+        </div>
+        <div className="card-bottom">
+          <div className="card-info">
+            <h4>{data.Title}</h4>
+            <p>{data.Year}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
