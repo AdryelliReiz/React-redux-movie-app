@@ -1,5 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit"
 import { RootStateOrAny } from "react-redux";
+import { movieApi } from "../../../api/movieApi";
+
+export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', async () => {
+  const textMovieSearch = 'Harry';
+  const response = await movieApi
+    .get(`?apiKey=${process.env.API_KEY || 'a558b683'}&s=${textMovieSearch}&type=movie`)
+        
+    const moviesData = response.data;
+
+  return moviesData;
+})
 
 interface IMovieData {
   Poster: string,
@@ -26,6 +38,18 @@ const movieSlice = createSlice({
     addMovies: (state, action: PayloadAction<IMoviesData>) => {
       state.movies = action.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAsyncMovies.pending, (state, action) => {
+      console.log("Pending...")
+    })
+    builder.addCase(fetchAsyncMovies.fulfilled, (state, action) => {
+      console.log("Fetched Successfully!")
+      return { ...state, movies: action.payload }
+    })
+    builder.addCase(fetchAsyncMovies.rejected, (state, action) => {
+      console.log("Rejected!")
+    })
   }
 })
 
