@@ -3,6 +3,23 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit"
 import { RootStateOrAny } from "react-redux";
 import { movieApi } from "../../../api/movieApi";
 
+
+interface IMovieData {
+  Poster: string,
+  Title: string,
+  Type: string,
+  Year: string,
+  imdbID: string,
+}
+
+interface IMoviesData {
+  Response: string,
+  Search: Array<IMovieData>,
+  totalResults: string
+}
+
+interface ISeriesData extends IMovieData {}
+
 export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', async () => {
   const textMovieSearch = 'Harry';
   const response = await movieApi
@@ -23,22 +40,6 @@ export const fetchAsyncShows = createAsyncThunk('movies/fetchAsyncShows', async 
   return seriesData;
 })
 
-interface IMovieData {
-  Poster: string,
-  Title: string,
-  Type: string,
-  Year: string,
-  imdbID: string,
-}
-
-interface IMoviesData {
-  Response: string,
-  Search: Array<IMovieData>,
-  totalResults: string
-}
-
-interface ISeriesData extends IMovieData {}
-
 const initialState  = {
   movies: <IMoviesData>{},
   shows: <ISeriesData>{}
@@ -53,7 +54,7 @@ const movieSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    //extraReducers of fetchAsyncMoies
+    //extraReducers of fetchAsyncMovies
     builder.addCase(fetchAsyncMovies.pending, (state, action) => {
       console.log("Pending...")
     })
