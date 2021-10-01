@@ -18,7 +18,35 @@ interface IMoviesData {
   totalResults: string
 }
 
-interface ISeriesData extends IMovieData {}
+interface ISeriesData extends IMovieData { }
+
+interface IMovieOrShowDetails {
+  Title: string;
+  Year: string;
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: Array<{}> ;
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
+  Response: string;
+}
 
 export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', async () => {
   const textMovieSearch = 'Harry';
@@ -40,9 +68,19 @@ export const fetchAsyncShows = createAsyncThunk('movies/fetchAsyncShows', async 
   return seriesData;
 })
 
+export const fetchAsyncMovieOrShowDetails = createAsyncThunk('movies/fetchAsyncMovieOrShowDetails', async (id: string) => {
+  const response = await movieApi
+    .get(`?apiKey=${process.env.API_KEY || 'a558b683'}&i=${id}&Plot=full`)
+        
+    const seriesData = response.data;
+
+  return seriesData;
+})
+
 const initialState  = {
-  movies: <IMoviesData>{},
-  shows: <ISeriesData>{}
+  movies: {} as IMoviesData,
+  shows: {} as ISeriesData,
+  selectMovieOrShow: {} as IMovieOrShowDetails,
 }
 
 const movieSlice = createSlice({
@@ -77,10 +115,23 @@ const movieSlice = createSlice({
     builder.addCase(fetchAsyncShows.rejected, (state, action) => {
       console.log("Rejected!")
     })
+
+    //extraReducer of fetchAsyncMovieOrShowDetails
+    builder.addCase(fetchAsyncMovieOrShowDetails.pending, (state, action) => {
+      console.log("Pending...")
+    })
+    builder.addCase(fetchAsyncMovieOrShowDetails.fulfilled, (state, action) => {
+      console.log("Fetched Successfully!")
+      return { ...state, selectMovieOrShow: action.payload }
+    })
+    builder.addCase(fetchAsyncMovieOrShowDetails.rejected, (state, action) => {
+      console.log("Rejected!")
+    })
   }
 })
 
 export const { addMovies } = movieSlice.actions;
 export const getAllMovies = (state: RootStateOrAny) => state.movies.movies;
 export const getAllShows = (state: RootStateOrAny) => state.movies.shows;
+export const getSelectMovieOrShow = (state: RootStateOrAny) => state.movies.selectMovieOrShow;
 export default movieSlice.reducer;
