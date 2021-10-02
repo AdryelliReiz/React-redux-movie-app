@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { fetchAsyncMovieOrShowDetails, getSelectMovieOrShow } from '../../app/features/movies/moviesSlice';
 
-// import { Container } from './styles';
+import { FiStar, FiHeart, FiClock, FiCalendar } from "react-icons/fi";
+import './styles.scss';
 
 export const MovieDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export const MovieDetails: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAsyncMovieOrShowDetails(id));
-  }, [dispatch])
+  }, [dispatch, id])
   return (
     <div className="movie-section">
       <div className="section-left">
@@ -21,16 +22,16 @@ export const MovieDetails: React.FC = () => {
         </div>
         <div className="movie-rating">
           <span>
-            IMDB Rating <i className="fa fa-start" ></i> : {selectMovieOrShowData.imdbRating}
+            IMDB Rating <i><FiStar size={24} /></i> : {selectMovieOrShowData.imdbRating}
           </span>
           <span>
-            IMDB Votes <i className="fa fa-thumbs-up"></i> : {selectMovieOrShowData.imdbVotes}
+            IMDB Votes <i><FiHeart size={24} /></i> : {selectMovieOrShowData.imdbVotes}
           </span>
           <span>
-            Runtime <i className="fa fa-film"></i> : {selectMovieOrShowData.Runtime}
+            Runtime <i><FiClock size={24} /></i> : {selectMovieOrShowData.Runtime}
           </span>
           <span>
-            Year <i className="fa fa-calendar"></i> : {selectMovieOrShowData.Year}
+            Year <i><FiCalendar size={24} /></i> : {selectMovieOrShowData.Year}
           </span>
         </div>
         <div className="movie-plot">{selectMovieOrShowData.Plot}</div>
@@ -58,7 +59,7 @@ export const MovieDetails: React.FC = () => {
         </div>
       </div>
       <div className="section-right">
-        <img src={selectMovieOrShowData} alt={selectMovieOrShowData.Title} />
+        <img src={selectMovieOrShowData.Poster} alt={selectMovieOrShowData.Title} />
       </div>
     </div>
   );
