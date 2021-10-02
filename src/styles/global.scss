@@ -21,6 +21,10 @@ body {
   background-color: var(--primary-color);
 }
 
+#root {
+  min-height: 100vh;
+}
+
 .container {
-  margin: 0 40px;
+  margin: 0 80px;
 }
