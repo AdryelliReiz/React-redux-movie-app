@@ -89,6 +89,9 @@ const movieSlice = createSlice({
   reducers: {
     addMovies: (state, action: PayloadAction<IMoviesData>) => {
       state.movies = action.payload;
+    },
+    removeSelectedMoviesOrShows: (state) => {
+      state.selectMovieOrShow = {} as IMovieOrShowDetails;
     }
   },
   extraReducers: (builder) => {
@@ -130,7 +133,7 @@ const movieSlice = createSlice({
   }
 })
 
-export const { addMovies } = movieSlice.actions;
+export const { addMovies, removeSelectedMoviesOrShows } = movieSlice.actions;
 export const getAllMovies = (state: RootStateOrAny) => state.movies.movies;
 export const getAllShows = (state: RootStateOrAny) => state.movies.shows;
 export const getSelectMovieOrShow = (state: RootStateOrAny) => state.movies.selectMovieOrShow;

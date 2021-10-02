@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { fetchAsyncMovieOrShowDetails, getSelectMovieOrShow } from '../../app/features/movies/moviesSlice';
+import { fetchAsyncMovieOrShowDetails, getSelectMovieOrShow, removeSelectedMoviesOrShows } from '../../app/features/movies/moviesSlice';
 
 import { FiStar, FiHeart, FiClock, FiCalendar } from "react-icons/fi";
 import './styles.scss';
@@ -13,6 +13,10 @@ export const MovieDetails: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAsyncMovieOrShowDetails(id));
+
+    return () => {
+      dispatch(removeSelectedMoviesOrShows())
+    }
   }, [dispatch, id])
   return (
     <div className="movie-section">

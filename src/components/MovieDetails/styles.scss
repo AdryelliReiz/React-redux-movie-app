@@ -4,6 +4,7 @@
   padding: 40px 0px;
   color: var(--font-primary);
   font-weight: 400;
+  height: calc(100vh - 144px);
 }
 
 .movie-rating {
@@ -44,4 +45,9 @@
 
 .movie-info > div span {
   color: var(--font-second);
+  width: 50%;
+}
+
+.section-right {
+  margin-left: 40px;
 }
