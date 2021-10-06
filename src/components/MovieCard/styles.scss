@@ -1,4 +1,7 @@
 .card-item {
+  min-height: 450px;
+  height: 100%;
+  margin: 10px;
   background: var(--second-color);
   cursor: pointer;
   transition: all 0.3s;
