@@ -10,8 +10,10 @@ export const Home: React.FC = () => {
   const [textMovieSearch, setTextMovieSearch] = useState('Harry');
   
   useEffect(() => {
-    dispatch(fetchAsyncMovies())
-    dispatch(fetchAsyncShows())
+    const textMoviesSearch = "Harry";
+    const textShowsSearch = "Friends";
+    dispatch(fetchAsyncMovies(textMoviesSearch))
+    dispatch(fetchAsyncShows(textShowsSearch))
   }, [dispatch])
 
   return (

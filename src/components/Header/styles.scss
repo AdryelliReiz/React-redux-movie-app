@@ -5,15 +5,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .logo {
-  color: var(--font-primary);
-  font-size: 20px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  a {
+    color: var(--font-primary);
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 
   img {
     height: 40px;
@@ -25,4 +28,35 @@
 .user-image img {
   width: 38px;
   height: 38px;
+}
+
+.search-bar {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  form {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    button {
+      padding: 0 1rem;
+      cursor: pointer;
+      height: 32px;
+      background-color: var(--font-second);
+      border: none;
+      border-radius: 4px;
+    }
+
+    input {
+      font-size: 1rem;
+      width: 100%;
+      padding: 5px 5px 5px 10px;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+  }
 }
